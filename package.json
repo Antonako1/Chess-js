@@ -1,0 +1,12 @@
+{
+  "name": "shakki",
+  "version": "1.0.0",
+  "description": "Shakki",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "koltti",
+  "license": "ISC"
+}

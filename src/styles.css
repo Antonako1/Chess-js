@@ -1,0 +1,57 @@
+body{margin: 0; padding: 0;
+    background-color: rgb(156, 130, 81);
+}
+#boardArea{
+    padding: 0px;
+    margin: 0px;
+}
+#boardArea button{
+    width: 100px;
+    height: 100px;
+}
+#boardArea button:focus{
+    outline: none;
+}
+#boardArea img{
+    z-index: 1;
+    width: 70px;
+    height: 70px;
+    position: relative;
+}
+#boardArea button:hover{opacity: 85%;}
+.whiteB{
+    background-color: rgba(195, 161, 129, 1);
+    color: black;
+}
+.blackB{
+    background-color: rgba(101, 67, 33, 1);
+    color: white;
+}
+
+.movesHighlight{
+    z-index: 9999;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    right: 50;
+    bottom: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px;
+    height: 90px;
+    border: 2px solid lightgreen;
+    border-radius: 100%;
+}
+.movesHighlight:hover{border: 2px solid green;}
+
+.pieceHighlightWhite{
+    background-color: rgba(255, 255, 255, 0.473);
+}
+.pieceHighlightBlack{
+    background-color: rgba(0, 0, 0, 0.445);
+}
+.currentlySelected{
+    background-color: rgba(0, 255, 0, 0.418);
+}
+.checkedKing{
+    background-color: rgba(255, 0, 0, 0.5);
+}

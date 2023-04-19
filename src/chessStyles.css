@@ -1,0 +1,24 @@
+.chess-piece {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .white {
+    background-color: #fff;
+  }
+  
+  .black {
+    background-color: #000;
+  }
+  
+  .king {
+    /* styles for the king piece */
+  }
+  
+  .queen {
+    /* styles for the queen piece */
+  }
+  
+  .pawn {
+    
+  }
