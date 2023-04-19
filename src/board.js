@@ -725,24 +725,24 @@ for(let i = validMovesKing.length - 1; i >= 0; i--){
 
 let WhitePiecesARR = [
   // Starting pos, Name, moves, first move
-  // ["A.2", "White Pawn 1", 1, true], ["B.2", "White Pawn 2", 1, true],
-  // ["C.2", "White Pawn 3", 1, true], ["D.2", "White Pawn 4", 1, true],
-  // ["E.2", "White Pawn 5", 1, true], ["F.2", "White Pawn 6", 1, true],
-  // ["G.2", "White Pawn 7", 1, true], ["H.2", "White Pawn 8", 1, true],
-  // ["B.1", "White Horse 1", 2], ["G.1", "White Horse 1", 2],
-  // ["C.1", "White Bishop 1", 1], ["F.1", "White Bishop 2", 1],
-  ["A.2", "White Rook 1", 1], ["H.2", "White Rook 2", 1], 
+  ["A.2", "White Pawn 1", 1, true], ["B.2", "White Pawn 2", 1, true],
+  ["C.2", "White Pawn 3", 1, true], ["D.2", "White Pawn 4", 1, true],
+  ["E.2", "White Pawn 5", 1, true], ["F.2", "White Pawn 6", 1, true],
+  ["G.2", "White Pawn 7", 1, true], ["H.2", "White Pawn 8", 1, true],
+  ["B.1", "White Horse 1", 2], ["G.1", "White Horse 1", 2],
+  ["C.1", "White Bishop 1", 1], ["F.1", "White Bishop 2", 1],
+  ["A.1", "White Rook 1", 1], ["H.1", "White Rook 2", 1], 
   ["D.1", "White Queen 1", 1], ["E.1", "White King 1", 1]
 ]
 let BlackPiecesArr = [
   // Starting pos, Name, moves, first move
-  // ["A.7", "Black Pawn 1", 1, true], ["B.7", "Black Pawn 2", 1, true],
-  // ["C.7", "Black Pawn 3", 1, true], ["D.7", "Black Pawn 4", 1, true],
-  // ["E.7", "Black Pawn 5", 1, true], ["F.7", "Black Pawn 6", 1, true],
-  // ["G.7", "Black Pawn 7", 1, true], ["H.7", "Black Pawn 8", 1, true],
-  // ["B.8", "Black Horse 1", 2], ["G.8", "Black Horse 1", 2],
-  // ["C.8", "Black Bishop 1", 1], ["F.8", "Black Bishop 2", 1],
-  // ["A.8", "Black Rook 1", 1], ["H.8", "Black Rook 2", 1], 
+  ["A.7", "Black Pawn 1", 1, true], ["B.7", "Black Pawn 2", 1, true],
+  ["C.7", "Black Pawn 3", 1, true], ["D.7", "Black Pawn 4", 1, true],
+  ["E.7", "Black Pawn 5", 1, true], ["F.7", "Black Pawn 6", 1, true],
+  ["G.7", "Black Pawn 7", 1, true], ["H.7", "Black Pawn 8", 1, true],
+  ["B.8", "Black Horse 1", 2], ["G.8", "Black Horse 1", 2],
+  ["C.8", "Black Bishop 1", 1], ["F.8", "Black Bishop 2", 1],
+  ["A.8", "Black Rook 1", 1], ["H.8", "Black Rook 2", 1], 
   ["D.8", "Black Queen 1", 1], ["E.8", "Black King 1", 1]
 ]
 // Initialize globally used variables
@@ -1106,35 +1106,35 @@ function highlightValidMoves() {
         // }
 
         if(validMovesKing.includes(id)){
-          for(let k = 0; k < BlackPiecesArr.length; k++){
-            if(BlackPiecesArr[k][1].includes("King")){
-              console.log(BlackPiecesArr[k][1]);
-              const element = document.getElementById(BlackPiecesArr[k][0]);
-              if (element.childElementCount > 0) {
-                // Check if element has child elements
-                if (element.children.length > 0) {
-                  // Remove child elements
-                  while (element.firstChild) {
-                    element.removeChild(element.firstChild);
-                  }
-                }
-              }
-            }}
-            for(let k = 0; k < WhitePiecesARR.length; k++){
-              if(WhitePiecesARR[k][1].includes("King")){
-                console.log(WhitePiecesARR[k][1]);
-                const element = document.getElementById(WhitePiecesARR[k][0]);
-                if (element.childElementCount > 0) {
-                  // Check if element has child elements
-                  if (element.children.length > 0) {
-                    // Remove child elements
-                    while (element.firstChild) {
-                      element.removeChild(element.firstChild);
-                    }
-                  }
-                }
-              }}
-              highlightPieces();
+          // for(let k = 0; k < BlackPiecesArr.length; k++){
+          //   if(BlackPiecesArr[k][1].includes("King")){
+          //     console.log(BlackPiecesArr[k][1]);
+          //     const element = document.getElementById(BlackPiecesArr[k][0]);
+          //     if (element.childElementCount > 0) {
+          //       // Check if element has child elements
+          //       if (element.children.length > 0) {
+          //         // Remove child elements
+          //         while (element.firstChild) {
+          //           element.removeChild(element.firstChild);
+          //         }
+          //       }
+          //     }
+          //   }}
+          //   for(let k = 0; k < WhitePiecesARR.length; k++){
+          //     if(WhitePiecesARR[k][1].includes("King")){
+          //       console.log(WhitePiecesARR[k][1]);
+          //       const element = document.getElementById(WhitePiecesARR[k][0]);
+          //       if (element.childElementCount > 0) {
+          //         // Check if element has child elements
+          //         if (element.children.length > 0) {
+          //           // Remove child elements
+          //           while (element.firstChild) {
+          //             element.removeChild(element.firstChild);
+          //           }
+          //         }
+          //       }
+          //     }}
+          removeHighlights(), highlightPieces();
           const element = document.getElementById(id);
           // Whites move
           if(whiteToMove){
