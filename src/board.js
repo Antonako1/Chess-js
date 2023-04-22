@@ -6,7 +6,6 @@ let inCheck = false;
 // Function to move pawn
 function CalculateMovesPawn(pos, name, move, firstMove){
   let currentPosition = pos;
-  console.log("currentPosition = " + currentPosition);
 
   let letter = currentPosition.charAt(0);
 
@@ -306,7 +305,6 @@ function CalculateMovesRook(pos, name, move){
         if(nextPosition == pos){
           
         }else if (doesItGotPieces(nextPosition)) {
-          console.log(firstEnemy);
           break;
         } else {
           validMoves.push(nextPosition);
@@ -380,7 +378,6 @@ function CalculateMovesQueen(pos, name, move){
         if(nextPosition == pos){
           
         }else if (doesItGotPieces(nextPosition)) {
-          console.log(firstEnemy);
           break;
         } else {
           validMoves.push(nextPosition);
@@ -491,7 +488,6 @@ function CalculateMovesQueen(pos, name, move){
   }
 }
 function CalculateMovesKing(pos, name, move){
-  validMovesKing = [];
   let currentPosition = pos;
   
   const pieceName = name;
@@ -505,7 +501,7 @@ function CalculateMovesKing(pos, name, move){
       // Top-Left
       nextNumber = number + move;
       nextPosition = letters[i-1] + "." + nextNumber;
-      console.log(nextPosition);
+      
       if (doesItGotPieces(nextPosition)) {
       } else {
         if(validMoves.includes(nextPosition)){
@@ -513,12 +509,12 @@ function CalculateMovesKing(pos, name, move){
           validMovesKing.push(nextPosition);
         }
       }
-      console.log(validMovesKing);
+      
 
       // Up
       nextNumber = number + move;
       nextPosition = letters[i] + "." + nextNumber;
-      console.log(nextPosition);
+      
       if (doesItGotPieces(nextPosition)) {
         
       } else {
@@ -526,12 +522,12 @@ function CalculateMovesKing(pos, name, move){
         }else{
           validMovesKing.push(nextPosition);
         } }
-        console.log(validMovesKing);
+        
 
       // Top-Right
       nextNumber = number + move;
       nextPosition = letters[i+1] + "." + nextNumber;
-      console.log(nextPosition);
+      
       if (doesItGotPieces(nextPosition)) {
         
       } else {
@@ -539,13 +535,13 @@ function CalculateMovesKing(pos, name, move){
         }else{
           validMovesKing.push(nextPosition);
         }  }
-        console.log(validMovesKing);
+        
 
       // Right
       nextNumber = number;
       nextPosition = letters[i+1] + "." + nextNumber;
-      console.log(nextPosition);
-              console.log(validMovesKing);
+      
+              
 
 
       if (doesItGotPieces(nextPosition)) {
@@ -555,12 +551,12 @@ function CalculateMovesKing(pos, name, move){
         }else{
           validMovesKing.push(nextPosition);
         }      }
-        console.log(validMovesKing);
+        
 
       // Bottom-Right
       nextNumber = number - move;
       nextPosition = letters[i+1] + "." + nextNumber;
-      console.log(nextPosition);
+      
 
       if (doesItGotPieces(nextPosition)) {
           
@@ -569,12 +565,12 @@ function CalculateMovesKing(pos, name, move){
           }else{
             validMovesKing.push(nextPosition);
           }       }
-          console.log(validMovesKing);
+          
 
       // Bottom
       nextNumber = number - move;
       nextPosition = letters[i] + "." + nextNumber;
-      console.log(nextPosition);
+      
 
       if (doesItGotPieces(nextPosition)) {
           
@@ -583,11 +579,11 @@ function CalculateMovesKing(pos, name, move){
           }else{
             validMovesKing.push(nextPosition);
           }       }
-          console.log(validMovesKing);
+          
       // Bottom-left
       nextNumber = number - move;
       nextPosition = letters[i-1] + "." + nextNumber;
-      console.log(nextPosition);
+      
       if (doesItGotPieces(nextPosition)) {
           
         } else {
@@ -596,12 +592,12 @@ function CalculateMovesKing(pos, name, move){
             validMovesKing.push(nextPosition);
           }
         }
-        console.log(validMovesKing);
+        
 
       // Left
       nextNumber = number;
       nextPosition = letters[i-1] + "." + nextNumber;
-      console.log(nextPosition);
+      
 
       if (doesItGotPieces(nextPosition)) {
           
@@ -611,8 +607,7 @@ function CalculateMovesKing(pos, name, move){
             validMovesKing.push(nextPosition);
           }
         }      
-        console.log(validMovesKing);
-        checkMate(pos);
+        highlightValidMovesKing()
       break;
     }
   }
@@ -628,6 +623,9 @@ function doesItGotPieces(nextPosition) {
       // Blacks turn
       if(whiteToMove == false){
         if(firstEnemy == true){
+          // if(WhitePiecesARR[i][1].includes("King")){
+          //   return true;
+          // }
           firstEnemy = false;
           return false;
         }else{
@@ -646,6 +644,9 @@ function doesItGotPieces(nextPosition) {
       // Whites turn
       if(whiteToMove == true){
         if(firstEnemy == true){
+          // if(BlackPiecesArr[i][1].includes("King")){
+          //   return true;
+          // }
           firstEnemy = false;
           return false;
         }else{
@@ -658,36 +659,79 @@ function doesItGotPieces(nextPosition) {
 
   return false;
 }
-// Checks for Checks on king
+// ! Checks for Checks on king
+// TODO inCheck = false;
+// TODO highlight fix
 function checkMate(coord){
-  validMovesKing =[];
+  validMovesKing = [];
+  validMoves=[];
   let checker;
   let checked;
   let currentPiece, currentName, currentMove
 // checkedKing is class name for red
+
+
 // Get piece that just moved
-// White
-for(let i = 0; i<WhitePiecesARR.length;i++){
-  if(WhitePiecesARR[i][0] == coord){
+if(whiteToMove){
+  // White
+  for(let i = 0; i<WhitePiecesARR.length;i++){
+    // if(WhitePiecesARR[i][0] == coord){
     checker = WhitePiecesARR[i];
+    // }
+    currentPiece = checker[0];
+    currentName = checker[1];
+    console.log(currentName);
+    currentMove = checker[2];
+    // validMoves = [];
+    // Calculate moves again to check for mates
+    if(currentName.includes("Pawn")) {
+      CalculateMovesPawn(currentPiece, currentName, currentMove, firstMove, currentPieceArrPos);
+    }else if(currentName.includes("Bishop")){
+      CalculateMovesBishop(currentPiece, currentName, currentMove);
+    }else if(currentName.includes("Horse")){
+      CalculateMovesHorse(currentPiece, currentName, currentMove);
+    }else if(currentName.includes("Rook")){
+      CalculateMovesRook(currentPiece, currentName, currentMove)
+    }else if(currentName.includes("Queen")){
+      CalculateMovesQueen(currentPiece, currentName, currentMove)
+    }
+    // else if(currentName.includes("King")){
+    //   CalculateMovesKing(currentPiece, currentName, currentMove)
+    // }
   }
-}
-// Black
-for(let i = 0; i<BlackPiecesArr.length;i++){
-  if(BlackPiecesArr[i][0] == coord){
-    checker = BlackPiecesArr[i];
+  //  !!!!!!!!!!!!!!!
+}else{
+  // Black
+  for(let i = 0; i<BlackPiecesArr.length;i++){
+    // if(BlackPiecesArr[i][0] == coord){
+      checker = BlackPiecesArr[i];
+    // }
+    currentPiece = checker[0];
+    currentName = checker[1];
+    console.log(currentName);
+    currentMove = checker[2];
+    // validMoves = [];
+    // Calculate moves again to check for mates
+    if(currentName.includes("Pawn")) {
+      CalculateMovesPawn(currentPiece, currentName, currentMove, firstMove, currentPieceArrPos);
+    }else if(currentName.includes("Bishop")){
+      CalculateMovesBishop(currentPiece, currentName, currentMove);
+    }else if(currentName.includes("Horse")){
+      CalculateMovesHorse(currentPiece, currentName, currentMove);
+    }else if(currentName.includes("Rook")){
+      CalculateMovesRook(currentPiece, currentName, currentMove)
+    }else if(currentName.includes("Queen")){
+      CalculateMovesQueen(currentPiece, currentName, currentMove)
+    }
+    // else if(currentName.includes("King")){
+    //   CalculateMovesKing(currentPiece, currentName, currentMove)
+    // }
   }
+  // !!!!!!!!!!!!!!!!!!!!!!!!
 }
-  currentPiece = checker[0];
-  currentName = checker[1];
-  currentMove = checker[2];
-  validMoves = [];
-  // Calculate moves again to check for mates
-  CalculateMovesPawn(currentPiece, currentName, currentMove, firstMove);
-  CalculateMovesBishop(currentPiece, currentName, currentMove);
-CalculateMovesHorse(currentPiece, currentName, currentMove);
-CalculateMovesRook(currentPiece, currentName, currentMove);
-CalculateMovesQueen(currentPiece, currentName, currentMove);
+
+
+
 // Get kings position
 // As white
 for(let i = 0; i < WhitePiecesARR.length; i++){
@@ -699,7 +743,6 @@ for(let i = 0; i < WhitePiecesARR.length; i++){
         currentPiece = checked[0];
         currentName = checked[1];
         currentMove = checked[2];
-        console.log("check");
         inCheck = true;
       }
     }
@@ -714,34 +757,20 @@ for(let i = 0; i < WhitePiecesARR.length; i++){
         currentPiece = checked[0];
         currentName = checked[1];
         currentMove = checked[2];
-        console.log("check");
         inCheck = true;
       }
     }
   }
-  console.log(inCheck);
   
-  // Get kings possible moves
-if(inCheck){
-  validMovesKing = [];
-  CalculateMovesKing(currentPiece, currentName, currentMove);
-  for(let i = validMoves.length - 1; i >= 0; i--){
-    if(validMoves.includes(validMovesKing[i])){
-      validMovesKing.splice(i, 1)
-      console.log(validMovesKing + " loler");
-      console.log(validMovesKing);
-      // Update squares
-      highlightValidMoves();
-      inCheck = true;
-    }else{
-      inCheck = false;
-    }
+CalculateMovesKing(currentPiece, currentName, currentMove)
+for(let i = 0 ; i < validMovesKing.length; i++){
+  if(validMoves.includes(validMovesKing[i])){
+    console.log("here");
+    validMovesKing.splice(i, 1)
   }
 }
-
-
-
 }
+// ! ///////////////////// ^^^^^^
 // All pieces on board
 let WhitePiecesARR = [
   // Starting pos, Name, moves, first move
@@ -751,8 +780,8 @@ let WhitePiecesARR = [
   // ["G.2", "White Pawn 7", 1, true], ["H.2", "White Pawn 8", 1, true],
   // ["B.1", "White Horse 1", 2], ["G.1", "White Horse 1", 2],
   // ["C.1", "White Bishop 1", 1], ["F.1", "White Bishop 2", 1],
-  ["A.2", "White Rook 1", 1], ["H.2", "White Rook 2", 1], 
-  ["D.1", "White Queen 1", 1], ["E.1", "White King 1", 1]
+  /*["A.2", "White Rook 1", 1],*/ ["H.2", "White Rook 2", 1], 
+  /*["D.1", "White Queen 1", 1],*/ ["E.1", "White King 1", 1]
 ]
 let BlackPiecesArr = [
   // Starting pos, Name, moves, first move
@@ -845,7 +874,6 @@ const buttons = document.querySelectorAll("button");
 buttons.forEach((button) => {
   highlightPieces();
   button.addEventListener("click", () => {
-    validMovesKing =[];
     // Get the ID of the button that was clicked
     const buttonId = button.getAttribute("id");
     let buttonIDasVar = document.getElementById(buttonId);
@@ -871,6 +899,7 @@ buttons.forEach((button) => {
               currentActivePiece = buttonId;
               // Clear valid moves arr
               validMoves = [];
+              validMovesKing=[];
     
               break;
             }
@@ -894,6 +923,7 @@ buttons.forEach((button) => {
               currentActivePiece = buttonId;
               // Clear valid moves arr
               validMoves = [];
+              validMovesKing=[];
 
               break;
             }
@@ -914,22 +944,34 @@ buttons.forEach((button) => {
             CalculateMovesQueen(currentPiece, currentName, currentMove)
           }else if(currentName.includes("King")){
             CalculateMovesKing(currentPiece, currentName, currentMove)
+            // checkMate
           }
-          highlightValidMoves();
+          if(currentName.includes("King")){
+            highlightValidMovesKing();
+          }else{
+            highlightValidMoves();
+          }
+          
           // After IFELSE set false;
           hasPieceInIt = false;
           firstClick = false;
         }else{
-          console.log("Square " + buttonId + " Is Empty");
-          console.log("White To move: " + whiteToMove);
+          // console.log("Square " + buttonId + " Is Empty");
+          // console.log("White To move: " + whiteToMove);
         }
         
         // Move pieces
-      } else if(validMoves.includes(buttonId)){
-        
-        if(validMoves.includes(buttonId)){
+        console.log(currentPiece, currentName, currentMove);
+      } 
+      else if(validMovesKing.includes(buttonId)){
+        console.log(currentPieceArrPos[1]);
+        if(validMovesKing.includes(buttonId)){
+          
+          console.log("Valid moves for king: " + validMovesKing);
           // Checks if square has own pieces in it
+
           if (whiteToMove == true) {
+            console.log(whiteToMove);
             let foundPiece = false;
             
             for (let k = 0; k < WhitePiecesARR.length; k++) {
@@ -942,13 +984,9 @@ buttons.forEach((button) => {
             if (foundPiece) {
               console.log("You cannot move to a square that has your own piece!");
             } else {
-              if (currentName.includes("Pawn")) {
-                currentPieceArrPos[3] = false;
-              }
-              // checkMate(buttonId);
               currentPieceArrPos[0] = buttonId;
               // Check for mates
-              checkMate(currentPieceArrPos[0]);
+              checkMate();
               eatPiece(currentActivePiece, buttonId);
               // Turns turn off after move
               if (whiteToMove == true) {
@@ -958,10 +996,12 @@ buttons.forEach((button) => {
               }
             }
           }else{
+            console.log(whiteToMove);
             let foundPiece = false;
             
             for (let k = 0; k < BlackPiecesArr.length; k++) {
               if (BlackPiecesArr[k][0] == buttonId) {                
+                console.log(BlackPiecesArr[k][0]);
                 foundPiece = true;
                 break;
               }
@@ -975,7 +1015,7 @@ buttons.forEach((button) => {
               }
               currentPieceArrPos[0] = buttonId;
               // Check for mates
-              checkMate(buttonId);
+              checkMate();
               eatPiece(currentActivePiece, buttonId);
               // Turns turn off after move
               if (whiteToMove == true) {
@@ -985,11 +1025,8 @@ buttons.forEach((button) => {
               }
             }
           }
-          
-
           removeHighlights(), highlightPieces();
           firstClick = true;
-          
         }
          // Remove board highlight
         for (let i = 0; i < letters.length; i++) {
@@ -1000,12 +1037,17 @@ buttons.forEach((button) => {
               element.classList.remove("currentlySelected");
             }
           }
-        }
-        
-      }else if(validMovesKing.includes(buttonId)){
-        if(validMovesKing.includes(buttonId)){
-          console.log("Valid moves for king: " + validMovesKing);
-          console.log("Valid moves" + validMoves);
+        } 
+      }
+      else if(validMoves.includes(buttonId)){
+        // if(currentName.includes("King")){
+        //   console.error("Moved using other pieces highlights!");
+        //   return;
+        // }
+        if(validMoves.includes(buttonId)){
+          
+            console.log(currentPieceArrPos[1]);
+
           // Checks if square has own pieces in it
           if (whiteToMove == true) {
             let foundPiece = false;
@@ -1025,7 +1067,7 @@ buttons.forEach((button) => {
               }
               currentPieceArrPos[0] = buttonId;
               // Check for mates
-              checkMate(currentPieceArrPos[0]);
+              checkMate();
               eatPiece(currentActivePiece, buttonId);
               // Turns turn off after move
               if (whiteToMove == true) {
@@ -1052,7 +1094,7 @@ buttons.forEach((button) => {
               }
               currentPieceArrPos[0] = buttonId;
               // Check for mates
-              checkMate(buttonId);
+              checkMate();
               eatPiece(currentActivePiece, buttonId);
               // Turns turn off after move
               if (whiteToMove == true) {
@@ -1062,11 +1104,8 @@ buttons.forEach((button) => {
               }
             }
           }
-          
-
           removeHighlights(), highlightPieces();
           firstClick = true;
-          
         }
          // Remove board highlight
         for (let i = 0; i < letters.length; i++) {
@@ -1136,8 +1175,70 @@ function highlightPieces(){
     }
   });
 }
-
+function highlightValidMovesKing(){
+  for (let i = 0; i < letters.length; i++) {
+    for (let j = 1; j <= 8; j++) {
+      const id = letters[i] + "." + j;
+      if(validMovesKing.includes(id)){
+        const element = document.getElementById(id);
+        // Whites move
+        if(whiteToMove){
+          // Find if it has black pieces
+          for(let k = 0; k < BlackPiecesArr.length; k++){
+            if(BlackPiecesArr[k][0] == id){
+              const div = document.createElement("div");
+              const img = element.querySelector('img');
+              if (img) {
+                img.classList.add('movesHighlight');
+              } else {
+                const div = document.createElement('div');
+                div.setAttribute('id', 'highlightKing');
+                element.appendChild(div);
+                div.classList.add('movesHighlight');
+              }
+            }
+          }
+          if(element.childElementCount > 0){
+          }else{
+            const div = document.createElement("div");
+            div.setAttribute("id", "highlightKing");
+            document.getElementById(id).appendChild(div);
+            div.classList.add("movesHighlight");
+          }
+    
+    
+          // Blacks move
+        }else{
+        // Find if it has white pieces
+        for(let k = 0; k < WhitePiecesARR.length; k++){
+          if(WhitePiecesARR[k][0] == id){
+            console.log("joo");
+            const img = element.querySelector('img');
+            if (img) {
+              img.classList.add('movesHighlight');
+            } else {
+              const div = document.createElement('div');
+              div.setAttribute('id', 'highlightKing');
+              element.appendChild(div);
+              div.classList.add('movesHighlight');
+            }
+          }
+        }
+        if(element.childElementCount > 0){
+        }else{
+          const div = document.createElement("div");
+          div.setAttribute("id", "highlightKing");
+          document.getElementById(id).appendChild(div);
+          div.classList.add("movesHighlight");
+        }
+    
+        }
+      }
+    }
+  }
+}
 function highlightValidMoves() {
+  
   for (let i = 0; i < letters.length; i++) {
     for (let j = 1; j <= 8; j++) {
       const id = letters[i] + "." + j;
@@ -1199,67 +1300,9 @@ function highlightValidMoves() {
       }
     }
   }
+  
  // ! king kong
-  for (let i = 0; i < letters.length; i++) {
-    for (let j = 1; j <= 8; j++) {
-      const id = letters[i] + "." + j;
-      if(validMovesKing.includes(id)){
-        // console.log("ID IS: " + id);
-        const element = document.getElementById(id);
-        // Whites move
-        if(whiteToMove){
-          // Find if it has black pieces
-          for(let k = 0; k < BlackPiecesArr.length; k++){
-            if(BlackPiecesArr[k][0] == id){
-              const div = document.createElement("div");
-              const img = element.querySelector('img');
-              if (img) {
-                img.classList.add('movesHighlight');
-              } else {
-                const div = document.createElement('div');
-                div.setAttribute('id', 'highlightKing');
-                element.appendChild(div);
-                div.classList.add('movesHighlight');
-              }
-            }
-          }
-          if(element.childElementCount > 0){
-          }else{
-            const div = document.createElement("div");
-            div.setAttribute("id", "highlightKing");
-            document.getElementById(id).appendChild(div);
-            div.classList.add("movesHighlight");
-          }
-    
-    
-          // Blacks move
-        }else{
-        // Find if it has white pieces
-        for(let k = 0; k < WhitePiecesARR.length; k++){
-          if(WhitePiecesARR[k][0] == id){
-            const img = element.querySelector('img');
-            if (img) {
-              img.classList.add('movesHighlight');
-            } else {
-              const div = document.createElement('div');
-              div.setAttribute('id', 'highlightKing');
-              element.appendChild(div);
-              div.classList.add('movesHighlight');
-            }
-          }
-        }
-        if(element.childElementCount > 0){
-        }else{
-          const div = document.createElement("div");
-          div.setAttribute("id", "highlightKing");
-          document.getElementById(id).appendChild(div);
-          div.classList.add("movesHighlight");
-        }
-    
-        }
-      }
-    }
-  }
+
 }
 function removeHighlights(){
   for (let i = 0; i < letters.length; i++) {
